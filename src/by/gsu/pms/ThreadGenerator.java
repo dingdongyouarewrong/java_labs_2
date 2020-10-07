@@ -3,6 +3,8 @@ package by.gsu.pms;
 import java.util.List;
 import java.util.Scanner;
 
+import static java.lang.System.exit;
+
 
 public class ThreadGenerator {
 
@@ -23,6 +25,7 @@ public class ThreadGenerator {
             upperBorder = scan.nextInt();
         } catch (Exception e) {
             System.out.println("Try to reboot your PC");
+            exit(1);
         }
 
 
