@@ -8,9 +8,6 @@ import static java.lang.System.exit;
 
 public class ThreadGenerator {
 
-
-
-
     public static void main(String[] args) {
         int threadsCount = 0;
         String operation = "";
@@ -34,6 +31,7 @@ public class ThreadGenerator {
         CalculatorThread calculator = new CalculatorThread();
         List<Integer> result = calculator.startInRange(threadsCount,upperBorder);
 
+        System.out.println("Sums from every thread");
         System.out.println(result);
 
         switch (operation) {
