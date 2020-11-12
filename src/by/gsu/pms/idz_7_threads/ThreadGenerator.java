@@ -1,4 +1,4 @@
-package by.gsu.pms;
+package by.gsu.pms.idz_7_threads;
 
 import java.util.List;
 import java.util.Scanner;
