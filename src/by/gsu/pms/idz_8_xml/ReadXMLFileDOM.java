@@ -9,7 +9,7 @@ import org.w3c.dom.Element;
 
 public class ReadXMLFileDOM {
 
-    public static void main(String[] argv) {
+    public void readXML(String uri) {
 
         try {
 
@@ -17,7 +17,7 @@ public class ReadXMLFileDOM {
                     DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder =
                     dbFactory.newDocumentBuilder();
-            Document doc = dBuilder.parse("https://www.w3schools.com/xml/note.xml");
+            Document doc = dBuilder.parse(uri);
             doc.getDocumentElement().normalize();
 
             NodeList nList = doc.getElementsByTagName("note");

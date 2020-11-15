@@ -6,7 +6,7 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class ReadXMLFileSAX {
 
-    public static void main(String[] argv) {
+    public void readXML(String uri) {
 
         try {
             SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -79,7 +79,7 @@ public class ReadXMLFileSAX {
 
             };
 
-            saxParser.parse("https://www.w3schools.com/xml/note.xml", handler);
+            saxParser.parse(uri, handler);
 
             note.reveal();
         } catch (Exception e) {
