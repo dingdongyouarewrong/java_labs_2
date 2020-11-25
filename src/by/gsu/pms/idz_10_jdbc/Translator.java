@@ -1,29 +1,50 @@
 package by.gsu.pms.idz_10_jdbc;
 
 import java.sql.SQLException;
-import java.util.Objects;
+import java.util.Scanner;
 
 public class Translator {
-    public Translator(String lang) {
-        this.lang = lang;
+
+    int langCode;
+    String langFrom;
+    String langTo;
+
+    public void translateOperation() {
+        System.out.println("Перевод");
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Введите номер языка для перевода:\n 1 - Русский\n 2 - Белорусский");
+        langCode = scan.nextInt();
+        if (langCode!=1 && langCode!=2) {
+            System.out.println("Язык не распознан");
+        }
+        System.out.println("Введите слово для перевода");
+        String word = scan.next();
+        String translatedWord = translateWord(word);
+        HTMLGenerator generator = new HTMLGenerator();
+        generator.generateTranslatedMarkup(langFrom, langTo, word, translatedWord);
     }
 
-    String lang;
-
-    public String translate_word(String word) {
-        String output_word = "";
-        if (Objects.equals(lang, "Belorussian")) {
-            WordsExtraction extractor = new WordsExtraction();
+    public String translateWord(String word) {
+        String outWord = "";
+        WordsExtraction extractor = new WordsExtraction();
+        if (langCode==2) {
+            langFrom = "Белорусский";
+            langTo = "Русский";
             try {
-                output_word = extractor.extractRussianWord(word);
+                outWord = extractor.extractRussianWord(word);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
         }
-        else {
-            System.out.println("jazik");
+        if (langCode==1) {
+            langFrom = "Русский";
+            langTo = "Белорусский";
+            try {
+                outWord = extractor.extractBelorussianWord(word);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
-
-        return output_word;
+        return outWord;
     }
 }

@@ -2,22 +2,52 @@ package by.gsu.pms.idz_10_jdbc;
 
 import java.sql.*;
 
+import static by.gsu.pms.idz_10_jdbc.Constants.URI_BELORUSSIAN_RUSSIAN_DB;
+import static by.gsu.pms.idz_10_jdbc.Constants.URI_RUSSIAN_BELORUSSIAN_DB;
+
 public class WordsExtraction {
+
     public String extractRussianWord(String word) throws SQLException {
         Connector connector = new Connector();
-        String uri = "jdbc:sqlite:/Users/dmitry/IdeaProjects/java_labs_2/src/by/gsu/pms/idz_10_jdbc/belorussian-russian.db";
-        Connection connection = connector.createConnection(uri);
-        String belorussianWord = null;
-        String query = "SELECT * FROM words WHERE belorussian=?;";
-        PreparedStatement getWord = connection.prepareStatement(query);
-        getWord.setString(1, word);
-        ResultSet resultSet = getWord.executeQuery();
-        if (resultSet.next()) {
-            belorussianWord = resultSet.getString("russian");
+        PreparedStatement getWord = null;
+        String russianWord;
+        try (Connection connection = connector.createConnection(URI_BELORUSSIAN_RUSSIAN_DB)) {
+            russianWord = null;
+            String query = "SELECT * FROM words WHERE belorussian=?;";
+            getWord = connection.prepareStatement(query);
+            getWord.setString(1, word);
+            ResultSet resultSet = getWord.executeQuery();
+            if (resultSet.next()) {
+                russianWord = resultSet.getString("russian");
+            }
         }
-        connection.close();
+        finally {
+            assert getWord != null;
+            getWord.close();
+        }
 
+        return russianWord;
+    }
 
-        return belorussianWord;
+    public String extractBelorussianWord(String word) throws SQLException {
+        Connector connector = new Connector();
+        PreparedStatement getWord = null;
+        String russianWord;
+        try (Connection connection = connector.createConnection(URI_RUSSIAN_BELORUSSIAN_DB)) {
+            russianWord = null;
+            String query = "SELECT * FROM words WHERE russian=?;";
+            getWord = connection.prepareStatement(query);
+            getWord.setString(1, word);
+            ResultSet resultSet = getWord.executeQuery();
+            if (resultSet.next()) {
+                russianWord = resultSet.getString("belorussian");
+            }
+        }
+        finally {
+            assert getWord != null;
+            getWord.close();
+        }
+
+        return russianWord;
     }
 }
