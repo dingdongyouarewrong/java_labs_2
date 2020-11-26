@@ -1,4 +1,4 @@
-package by.gsu.pms.idz_10_jdbc;
+package by.gsu.pms.idz_10_jdbc.database_support;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,37 +25,37 @@ public class WordsRemoving {
 
     public void removeBelorussianWord(String word ) throws SQLException {
         Connector connector = new Connector();
-        PreparedStatement setWord = null;
+        PreparedStatement statement = null;
         try (Connection connection = connector.createConnection(URI_BELORUSSIAN_RUSSIAN_DB)) {
             String query = "DELETE FROM words WHERE belorussian=?;";
-            setWord = connection.prepareStatement(query);
-            setWord.setString(1, word);
-            setWord.executeUpdate();
+            statement = connection.prepareStatement(query);
+            statement.setString(1, word);
+            statement.executeUpdate();
 
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
         finally {
-            assert setWord != null;
-            setWord.close();
+            assert statement != null;
+            statement.close();
         }
     }
 
     public void removeRussianWord(String word ) throws SQLException {
         Connector connector = new Connector();
-        PreparedStatement setWord = null;
+        PreparedStatement statement = null;
         try (Connection connection = connector.createConnection(URI_RUSSIAN_BELORUSSIAN_DB)) {
             String query = "DELETE FROM words WHERE russian=?;";
-            setWord = connection.prepareStatement(query);
-            setWord.setString(1, word);
-            setWord.executeUpdate();
+            statement = connection.prepareStatement(query);
+            statement.setString(1, word);
+            statement.executeUpdate();
 
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
         finally {
-            assert setWord != null;
-            setWord.close();
+            assert statement != null;
+            statement.close();
         }
     }
 

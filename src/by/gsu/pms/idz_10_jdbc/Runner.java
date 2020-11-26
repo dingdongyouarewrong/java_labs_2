@@ -1,10 +1,18 @@
 package by.gsu.pms.idz_10_jdbc;
 
 
+import by.gsu.pms.idz_10_jdbc.database_support.DBCreator;
+import by.gsu.pms.idz_10_jdbc.database_support.WordsAdding;
+import by.gsu.pms.idz_10_jdbc.database_support.WordsRemoving;
+
 import java.util.Scanner;
 
 public class Runner {
     public static void main(String[] args) {
+        DBCreator creator = new DBCreator();
+        creator.createTables();
+        creator.insertData();
+        System.out.println("Таблицы с данными созданы автоматически");
 
         Scanner scan = new Scanner(System.in);
         System.out.println("Введите  номер операции:\n 1 - Перевод\n 2 - Добавление перевода\n 3 - Удаление перевода");

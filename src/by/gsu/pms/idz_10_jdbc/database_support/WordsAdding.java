@@ -1,4 +1,4 @@
-package by.gsu.pms.idz_10_jdbc;
+package by.gsu.pms.idz_10_jdbc.database_support;
 
 import java.sql.*;
 import java.util.Scanner;
@@ -12,21 +12,21 @@ public class WordsAdding {
                                           String belorussianWord) throws SQLException {
 
         Connector connector = new Connector();
-        PreparedStatement setWord = null;
+        PreparedStatement statement = null;
         try (Connection connection = connector.createConnection(URI_BELORUSSIAN_RUSSIAN_DB)) {
             String query = "INSERT INTO words (belorussian, russian)\n" +
                     "\tVALUES (?,?);";
-            setWord = connection.prepareStatement(query);
-            setWord.setString(1, belorussianWord);
-            setWord.setString(2, russianWord);
-            setWord.executeUpdate();
+            statement = connection.prepareStatement(query);
+            statement.setString(1, belorussianWord);
+            statement.setString(2, russianWord);
+            statement.executeUpdate();
 
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
         finally {
-            assert setWord != null;
-            setWord.close();
+            assert statement != null;
+            statement.close();
         }
     }
 

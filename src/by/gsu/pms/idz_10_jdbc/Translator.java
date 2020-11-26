@@ -1,5 +1,7 @@
 package by.gsu.pms.idz_10_jdbc;
 
+import by.gsu.pms.idz_10_jdbc.database_support.WordsExtraction;
+
 import java.sql.SQLException;
 import java.util.Scanner;
 

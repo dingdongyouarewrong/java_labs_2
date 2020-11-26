@@ -1,4 +1,4 @@
-package by.gsu.pms.idz_10_jdbc;
+package by.gsu.pms.idz_10_jdbc.database_support;
 
 import java.sql.*;
 
