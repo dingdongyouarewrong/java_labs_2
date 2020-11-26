@@ -64,7 +64,7 @@ public class WordsAdding {
             case 2-> extendBelorussianRussianDict();
             default -> System.out.println("Словарь не распознан");
         }
-        System.out.println("Введите слово для перевода");
+        System.out.println("Перевод добавлен");
 
     }
 
